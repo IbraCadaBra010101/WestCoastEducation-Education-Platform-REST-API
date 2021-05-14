@@ -9,7 +9,9 @@ namespace WestCoastEducation.Entites
     public class Course
     {
         public int Id { get; set; }
+        [Column(TypeName = "VARCHAR(25)")]
         public string CourseName { get; set; }
+        [Column(TypeName = "VARCHAR(200)")]
         public string CourseInformation { get; set; }
         public string Subject { get; set; }
         public DateTime StartDate { get; set; }
