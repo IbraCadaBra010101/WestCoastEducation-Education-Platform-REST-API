@@ -57,3 +57,21 @@ namespace WestCoastEducation
         }
     }
 }
+
+/**
+ * Hantering av kurser:
+• Det skall vara möjligt att skapa kurser
+• Lista kurser
+• Söka kurs på titel, del av titel samt kursnummer
+• Uppdatera en kurs
+• Markera en kurs om pensionerad
+Hantering av deltagare
+• En deltagare måste kunna registrera sig i systemet
+• Följande uppgifter måste finnas för varje deltagare
+o Förnam
+o Efternamn
+o E-postadress som också kommer att användas som användarnamn
+o Mobil nummer
+o Adress
+ * 
+ * **/
