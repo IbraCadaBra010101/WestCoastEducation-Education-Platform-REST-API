@@ -21,17 +21,16 @@ namespace WestCoastEducation.Entites
         [Column(TypeName = "VARCHAR(25)")]
         public string Subject { get; set; }
 
-        [Column(TypeName = "SMALLINT")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        [Column(TypeName = "SMALLINT")]
-        public DateTime FinishDate { get; set; }
 
-        public bool IsCanceled { get; set; } // for update only
+        public DateTime? FinishDate { get; set; }
 
-        public double AverageAttendance { get; set; } // for update only
+        public bool IsCanceled { get; set; }
 
-        public double AverageGrade { get; set; } // update only
+        public double AverageAttendance { get; set; }
+
+        public double AverageGrade { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
     }
