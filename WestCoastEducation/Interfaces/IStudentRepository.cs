@@ -9,7 +9,7 @@ namespace WestCoastEducation.Interfaces
         void AddStudentToRepo(StudentDtoForCreation student);
         Task<IEnumerable<StudentDto>> GetAllStudentsAsync();
         Task<StudentDto> GetStudentByIdAsync(int id);
-        void Delete(StudentDto student);
-        void Update(UpdateStudentDto student);
+        void DeleteStudent(StudentDto student);
+        void UpdateStudent(UpdateStudentDto student); 
     }
 }
