@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,14 @@ namespace WestCoastEducation.Data
 {
     public class StudentRepository : IStudentRepository
     {
+        private readonly DataContext _context;
+        private readonly IMapper _mapper;
+
+        public StudentRepository(DataContext context, IMapper mapper)
+        {
+            _context = context; 
+            _mapper = mapper;
+        }
         public void AddStudentToRepo(StudentDtoForCreation student)
         {
             throw new NotImplementedException();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WestCoastEducation.Entites;
+using WestCoastEducation.Models.CourseDtos;
 
 namespace WestCoastEducation.Data
 {
@@ -16,5 +17,7 @@ namespace WestCoastEducation.Data
         {
 
         }
+
+        public DbSet<WestCoastEducation.Models.CourseDtos.CourseDto> CourseDto { get; set; }
     }
 }

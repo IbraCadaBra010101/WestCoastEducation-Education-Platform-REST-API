@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace WestCoastEducation.Models.StudentDtos
 {
     public class UpdateStudentDto
-    {
+    { 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

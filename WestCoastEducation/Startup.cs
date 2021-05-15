@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WestCoastEducation.Data;
+using WestCoastEducation.Helpers;
 using WestCoastEducation.Interfaces;
 
 namespace WestCoastEducation
@@ -34,7 +35,7 @@ namespace WestCoastEducation
             {
                 options.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
             });
-            //services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();

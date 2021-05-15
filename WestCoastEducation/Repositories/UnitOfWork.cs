@@ -17,9 +17,9 @@ namespace WestCoastEducation.Data
             _context = context;
             _mapper = mapper;
         }
-        public IStudentRepository StudentRepository => throw new NotImplementedException();
+        public IStudentRepository StudentRepository => new StudentRepository(_context, _mapper);
 
-        public ICourseRepository CourseRepository => throw new NotImplementedException();
+        public ICourseRepository CourseRepository => new CourseRepository(_context, _mapper);
 
         public async Task<bool> Complete()
         {
