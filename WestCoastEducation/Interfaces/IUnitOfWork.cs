@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace WestCoastEducation.Interfaces
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        IStudentRepository StudentRepository { get; }
+        ICourseRepository CourseRepository { get; }
+        Task<bool> Complete();
+        bool HasChanges();
     }
 }
