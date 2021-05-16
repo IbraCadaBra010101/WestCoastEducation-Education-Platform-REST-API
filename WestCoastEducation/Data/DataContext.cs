@@ -18,6 +18,5 @@ namespace WestCoastEducation.Data
 
         }
 
-        public DbSet<WestCoastEducation.Models.CourseDtos.CourseDto> CourseDto { get; set; }
     }
 }

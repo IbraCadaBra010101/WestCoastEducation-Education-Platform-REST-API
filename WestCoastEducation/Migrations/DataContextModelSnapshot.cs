@@ -19,33 +19,12 @@ namespace WestCoastEducation.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CoursesId", "StudentsId");
-
-                    b.HasIndex("StudentsId");
-
-                    b.ToTable("CourseStudent");
-                });
-
             modelBuilder.Entity("WestCoastEducation.Entites.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("AverageAttendance")
-                        .HasColumnType("float");
-
-                    b.Property<double>("AverageGrade")
-                        .HasColumnType("float");
 
                     b.Property<string>("CourseInformation")
                         .HasColumnType("VARCHAR(200)");
@@ -56,9 +35,6 @@ namespace WestCoastEducation.Migrations
                     b.Property<DateTime?>("FinishDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsCanceled")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -67,7 +43,7 @@ namespace WestCoastEducation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Course", "Courses");
                 });
 
             modelBuilder.Entity("WestCoastEducation.Entites.Student", b =>
@@ -77,29 +53,23 @@ namespace WestCoastEducation.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<short>("AverageAttendance")
-                        .HasColumnType("SMALLINT");
-
                     b.Property<string>("City")
                         .HasColumnType("VARCHAR(12)");
 
                     b.Property<string>("Country")
-                        .HasColumnType("VARCHAR(20)");
+                        .HasColumnType("VARCHAR(60)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("VARCHAR(20)");
-
-                    b.Property<bool>("IsEnrolledInSchool")
-                        .HasColumnType("bit");
+                        .HasColumnType("VARCHAR(14)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("VARCHAR(20)");
+                        .HasColumnType("VARCHAR(14)");
 
                     b.Property<string>("PersonalNumber")
-                        .HasColumnType("VARCHAR(12)");
+                        .HasColumnType("CHAR(14)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("VARCHAR(12)");
+                        .HasColumnType("VARCHAR(20)");
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("VARCHAR(12)");
@@ -109,22 +79,7 @@ namespace WestCoastEducation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
-                });
-
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.HasOne("WestCoastEducation.Entites.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WestCoastEducation.Entites.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Student", "Students");
                 });
 #pragma warning restore 612, 618
         }

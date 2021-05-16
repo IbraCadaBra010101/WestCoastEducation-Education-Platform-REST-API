@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace WestCoastEducation.Entites
 {
     [Table("Course", Schema = "Courses")]
-
     public class Course
     {
         public int Id { get; set; }
@@ -27,12 +26,5 @@ namespace WestCoastEducation.Entites
 
 
         public DateTime? FinishDate { get; set; }
-
-        public bool IsCanceled { get; set; }
-
-        public double AverageAttendance { get; set; }
-
-        public double AverageGrade { get; set; }
-
     }
 }

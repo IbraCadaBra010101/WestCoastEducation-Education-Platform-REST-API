@@ -17,17 +17,6 @@ namespace WestCoastEducation.Models.CourseDtos
 
         [Required(ErrorMessage = "Kursämnet saknas!"), MaxLength(25, ErrorMessage = "Kursämnet överskrier max antal tecken")]
       
-        public string Subject { get; set; }
-      
-
-        public virtual ICollection<Student> Students { get; set; }
-
-        [Range(0, 100)]
-        public double AverageAttendance { get; set; }
-
-        [Range(0, 5)]
-        public double AverageGrade { get; set; }
-
-        public bool IsCanceled { get; set; }
+        public string Subject { get; set; }   
     }
 }
