@@ -8,70 +8,71 @@ using Microsoft.EntityFrameworkCore;
 using WestCoastEducation.Data;
 using WestCoastEducation.Interfaces;
 using WestCoastEducation.Models.CourseDtos;
+using WestCoastEducation.Models.StudentDtos;
 
 namespace WestCoastEducation.Controllers
 {
     [ApiController]
-    [Route("api/Course")]
+    [Route("api/Student")]
 
-    public class CourseController : ControllerBase
+    public class StudentController : ControllerBase 
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CourseController(IUnitOfWork unitOfWork)
+        public StudentController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-
+         
         // GET: api/Course
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourseDto()
-        {
-            var result = await _unitOfWork.CourseRepository.GetAllCoursesAsync();
+        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudentDto()
+        { 
+            var result = await _unitOfWork.StudentRepository.GetAllStudentsAsync();
             if (result == null) return StatusCode(500, "This category was not found");
             return Ok(result);
         }
 
         // GET: api/Course/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CourseDto>> GetCourseDto(int id)
+        public async Task<ActionResult<StudentDto>> GetStudentDto(int id)
         {
-            var result = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
-            if (result == null) return NotFound();
+            var result = await _unitOfWork.StudentRepository.GetStudentByIdAsync(id);
+            if (result == null) return NotFound(); 
             return Ok(result);
         }
 
         // PATCH: api/Course/5
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchCourseDto(int id, UpdateCourseDto courseModelUpdate)
-        {
+        public async Task<IActionResult> PatchStudentDto(int id, UpdateStudentDto studentModelUpdate)
+        { 
             try
             {
-                var result = _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
+                var result = _unitOfWork.StudentRepository.GetStudentByIdAsync(id);
 
 
-                if (result == null) return StatusCode(404, "Could not find the course you requested an update on");
+                if (result == null) return StatusCode(404, "Could not find the student you requested an update on");
 
-                _unitOfWork.CourseRepository.UpdateCourse(courseModelUpdate);
+                _unitOfWork.StudentRepository.UpdateStudent(studentModelUpdate);
 
                 if (await _unitOfWork.Complete()) return NoContent();
 
-                return StatusCode(500, $"Could not update course nr {id}");
+                return StatusCode(500, $"Could not update student nr {id}");
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
         }
-
+ 
         // POST: api/Course
-        [HttpPost]
-        public async Task<ActionResult<CourseDto>> PostCourseDto(CourseDtoForCreation courseDto)
+        [HttpPost] 
+        public async Task<ActionResult<StudentDto>> PostCourseDto(StudentDtoForCreation studentDto)
         {
             try
             {
-                var result = await _unitOfWork.CourseRepository.GetCourseByNameAsync(courseDto.CourseName);
+                var result = await _unitOfWork.StudentRepository.GetStudentByIdAsync(studentDto.);
                 if (result.CourseName == courseDto.CourseName) return BadRequest($"Kursen {courseDto.CourseName} existerar redan!");
 
                 _unitOfWork.CourseRepository.AddCourseToRepo(courseDto);
