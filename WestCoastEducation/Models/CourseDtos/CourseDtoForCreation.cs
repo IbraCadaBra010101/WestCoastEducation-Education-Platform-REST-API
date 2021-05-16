@@ -8,6 +8,8 @@ namespace WestCoastEducation.Models.CourseDtos
 {
     public class CourseDtoForCreation : CourseDtoBaseClass
     {
-
+        
+        public DateTime StartDate { get; set; }
+        public DateTime FinishDate { get; set; }
     }
 }

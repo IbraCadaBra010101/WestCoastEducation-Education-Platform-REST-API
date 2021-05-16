@@ -8,6 +8,10 @@ namespace WestCoastEducation.Models.CourseDtos
 {
     public class CourseDto : CourseDtoBaseClass
     {
+        // View, but do not create or update
         public int Id { get; set; }
+        // view but not updateable 
+        public DateTime StartDate { get; set; }
+        public DateTime FinishDate { get; set; }
     }
 }

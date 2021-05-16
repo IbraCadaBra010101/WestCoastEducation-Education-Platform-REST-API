@@ -36,70 +36,72 @@ namespace WestCoastEducation.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourseDto(int id)
         {
-            return Ok()
+            var result = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
+            if (result == null) return NotFound();
+            return Ok(result);
         }
 
         // PUT: api/Course/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourseDto(int id, CourseDto courseDto)
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchCourseDto(int id, UpdateCourseDto courseModelUpdate)
         {
-            if (id != courseDto.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(courseDto).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseDtoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                var result = _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
 
-            return NoContent();
+
+                if (result == null) return StatusCode(404, "Could not find the course you requested an update on");
+
+                _unitOfWork.CourseRepository.UpdateCourse(courseModelUpdate);
+
+                if (await _unitOfWork.Complete()) return NoContent();
+
+                return StatusCode(500, $"Could not update course nr {id}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // POST: api/Course
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CourseDto>> PostCourseDto(CourseDto courseDto)
+        public async Task<ActionResult<CourseDto>> PostCourseDto(CourseDtoForCreation courseDto)
         {
-            _context.CourseDto.Add(courseDto);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var result = await _unitOfWork.CourseRepository.GetCourseByNameAsync(courseDto.CourseName);
+                if (result.CourseName == courseDto.CourseName) return BadRequest($"Kursen {courseDto.CourseName} existerar redan!");
 
-            return CreatedAtAction("GetCourseDto", new { id = courseDto.Id }, courseDto);
+                _unitOfWork.CourseRepository.AddCourseToRepo(courseDto);
+                if (await _unitOfWork.Complete()) return StatusCode(201, "Succesfull, a new course resource was created");
+                return StatusCode(500, "Could not save course resource");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
-
         // DELETE: api/Course/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourseDto(int id)
         {
-            var courseDto = await _context.CourseDto.FindAsync(id);
-            if (courseDto == null)
+            try
             {
-                return NotFound();
+                var courseToDelete = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
+
+                if (courseToDelete == null) return NotFound($"Could not find course with id number {id}. Operation was canceled");
+                _unitOfWork.CourseRepository.DeleteCourse(courseToDelete);
+
+                if (await _unitOfWork.Complete()) return StatusCode(200, $"{courseToDelete.CourseName} was succesfully deleted");
+                return StatusCode(500, $"Could not delete {courseToDelete.CourseName}");
             }
+            catch (Exception ex)
+            {
 
-            _context.CourseDto.Remove(courseDto);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool CourseDtoExists(int id)
-        {
-            return _context.CourseDto.Any(e => e.Id == id);
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

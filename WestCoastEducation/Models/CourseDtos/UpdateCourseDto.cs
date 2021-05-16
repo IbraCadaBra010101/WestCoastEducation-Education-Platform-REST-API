@@ -9,12 +9,6 @@ namespace WestCoastEducation.Models.CourseDtos
 {
     public class UpdateCourseDto : CourseDtoBaseClass
     {
-        [Range(0,100)]
-        public double AverageAttendance { get; set; }
-
-        [Range(0, 5)]
-        public double AverageGrade { get; set; }
-
-        public bool IsCanceled { get; set; }
+      
     } 
 }

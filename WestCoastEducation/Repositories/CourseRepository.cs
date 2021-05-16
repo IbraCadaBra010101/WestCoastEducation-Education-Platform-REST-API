@@ -33,19 +33,20 @@ namespace WestCoastEducation.Data
             throw new NotImplementedException();
         }
 
-        public Task<CourseDto> GetCourseByIdAsync()
+        public Task<CourseDto> GetCourseByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<CourseDto> GetCourseByNameAsync()
+        public Task<CourseDto> GetCourseByNameAsync(string courseName) 
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateCoursee(UpdateCourseDto course)
+        public void UpdateCourse(UpdateCourseDto courseModelUpdate)
         {
             throw new NotImplementedException();
         }
     }
 }
+ 

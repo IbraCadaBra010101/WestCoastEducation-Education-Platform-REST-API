@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using WestCoastEducation.Entites;
+using WestCoastEducation.Models;
+using WestCoastEducation.Models.CourseDtos;
 
 namespace WestCoastEducation.Helpers
 {
     public class AutoMapperProfile : Profile
     {
-
+        public AutoMapperProfile()
+        {
+            CreateMap<UpdateCourseDto, CourseDto>();
+        }
     }
 }

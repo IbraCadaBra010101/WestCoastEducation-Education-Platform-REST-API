@@ -8,9 +8,9 @@ namespace WestCoastEducation.Interfaces
     {
         void AddCourseToRepo(CourseDtoForCreation course);
         Task<IEnumerable<CourseDto>> GetAllCoursesAsync();
-        Task<CourseDto> GetCourseByIdAsync();  
-        Task<CourseDto> GetCourseByNameAsync(); 
-        void DeleteCourse(CourseDto course);
-        void UpdateCoursee(UpdateCourseDto course);
+        Task<CourseDto> GetCourseByIdAsync(int id);  
+        Task<CourseDto> GetCourseByNameAsync(string courseName); 
+        void DeleteCourse(CourseDto course); 
+        void UpdateCourse(UpdateCourseDto courseModelUpdate); 
     } 
 } 
