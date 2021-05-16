@@ -43,6 +43,11 @@ namespace WestCoastEducation.Data
             throw new NotImplementedException();
         }
 
+        public Task<StudentDto> GetStudentByPersonalNumber(string personalnumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateStudent(UpdateStudentDto student)
         {
             throw new NotImplementedException();
