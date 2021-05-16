@@ -9,7 +9,12 @@ namespace WestCoastEducation.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<UpdateCourseDto, CourseDto>();
+       
+            CreateMap<CourseDtoForCreation, Course>();
+            CreateMap<UpdateCourseDto, Course>();
+            CreateMap<CourseDto, Course>();
+            CreateMap<Course, CourseDto>();
+
         }
     }
 }

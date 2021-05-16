@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WestCoastEducation.Entites;
 using WestCoastEducation.Interfaces;
 using WestCoastEducation.Models.CourseDtos;
 
@@ -20,7 +22,9 @@ namespace WestCoastEducation.Data
         }
         public void AddCourseToRepo(CourseDtoForCreation course)
         {
-            throw new NotImplementedException();
+            var creationCourseMappedToEntityModel = _mapper.Map<Course>(course);
+
+            _context.Entry(creationCourseMappedToEntityModel).State = EntityState.Added;
         }
 
         public void DeleteCourse(CourseDto course)
@@ -28,19 +32,22 @@ namespace WestCoastEducation.Data
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<CourseDto>> GetAllCoursesAsync()
+        public async Task<IEnumerable<CourseDto>> GetAllCoursesAsync()
         {
-            throw new NotImplementedException();
+            var result = await  _context.Course.ToListAsync();
+            return _mapper.Map<IEnumerable<CourseDto>>(result);
         }
 
-        public Task<CourseDto> GetCourseByIdAsync(int id)
+        public async Task<CourseDto> GetCourseByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var singleCourseEntity = await _context.Course.FindAsync(id);
+            var mappedTowardCourseDto = _mapper.Map<CourseDto>(singleCourseEntity);
+            return mappedTowardCourseDto;
         }
 
-        public Task<CourseDto> GetCourseByNameAsync(string courseName) 
+        public async Task<Course> GetCourseByNameAsync(string courseName)
         {
-            throw new NotImplementedException();
+          return await _context.Course.FirstOrDefaultAsync(eachCourse => eachCourse.CourseName == courseName);
         }
 
         public void UpdateCourse(UpdateCourseDto courseModelUpdate)
@@ -49,4 +56,3 @@ namespace WestCoastEducation.Data
         }
     }
 }
- 

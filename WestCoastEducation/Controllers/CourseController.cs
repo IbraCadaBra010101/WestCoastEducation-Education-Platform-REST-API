@@ -68,7 +68,7 @@ namespace WestCoastEducation.Controllers
             try
             {
                 var result = await _unitOfWork.CourseRepository.GetCourseByNameAsync(courseDto.CourseName);
-                if (result.CourseName == courseDto.CourseName) return BadRequest($"Kursen {courseDto.CourseName} existerar redan!");
+                if (result != null) return BadRequest($"Kursen {courseDto.CourseName} existerar redan!");
 
                 _unitOfWork.CourseRepository.AddCourseToRepo(courseDto);
                 if (await _unitOfWork.Complete()) return StatusCode(201, "Succesfull, a new course resource was created");

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using WestCoastEducation.Entites;
 using WestCoastEducation.Models.CourseDtos;
 
 namespace WestCoastEducation.Interfaces
@@ -9,7 +10,7 @@ namespace WestCoastEducation.Interfaces
         void AddCourseToRepo(CourseDtoForCreation course);
         Task<IEnumerable<CourseDto>> GetAllCoursesAsync();
         Task<CourseDto> GetCourseByIdAsync(int id);  
-        Task<CourseDto> GetCourseByNameAsync(string courseName); 
+        Task<Course> GetCourseByNameAsync(string courseName); 
         void DeleteCourse(CourseDto course); 
         void UpdateCourse(UpdateCourseDto courseModelUpdate); 
     } 
