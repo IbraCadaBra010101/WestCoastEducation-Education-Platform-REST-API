@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace WestCoastEducation.Entites
 {
+    [Table("Course", Schema = "Courses")]
+
     public class Course
     {
         public int Id { get; set; }
@@ -32,6 +34,5 @@ namespace WestCoastEducation.Entites
 
         public double AverageGrade { get; set; }
 
-        public virtual ICollection<Student> Students { get; set; }
     }
 }

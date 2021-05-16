@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace WestCoastEducation.Entites
-{
+{  
+    [Table("Student", Schema = "Students")]
     public class Student
     { 
+      
         public int Id { get; set; }
 
         [Column(TypeName = "VARCHAR(20)")]
@@ -38,7 +40,7 @@ namespace WestCoastEducation.Entites
         [Column(TypeName = "VARCHAR(20)")]
         public string Country { get; set; }
 
-
+        [Column(TypeName = "BIT")]
         public bool IsEnrolledInSchool { get; set; } // for when updating the student 
 
 
@@ -46,7 +48,6 @@ namespace WestCoastEducation.Entites
         public double AverageAttendance { get; set; } // for when updating the student
 
 
-        public virtual ICollection<Course> Courses { get; set; } // for when updating the student
-    }
+     }
 }
 
