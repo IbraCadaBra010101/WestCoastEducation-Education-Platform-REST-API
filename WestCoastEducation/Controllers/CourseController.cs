@@ -49,7 +49,7 @@ namespace WestCoastEducation.Controllers
 
                 if (result == null) return StatusCode(404, "Could not find the course you requested an update on");
 
-                _unitOfWork.CourseRepository.UpdateCourse(courseModelUpdate);
+                _unitOfWork.CourseRepository.UpdateCourse(courseModelUpdate, result);
 
                 if (await _unitOfWork.Complete()) return NoContent();
 

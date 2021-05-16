@@ -12,6 +12,6 @@ namespace WestCoastEducation.Interfaces
         Task<CourseDto> GetCourseByIdAsync(int id);  
         Task<Course> GetCourseByNameAsync(string courseName); 
         void DeleteCourse(CourseDto course); 
-        void UpdateCourse(UpdateCourseDto courseModelUpdate); 
+        void UpdateCourse(UpdateCourseDto courseModelUpdate, int id); 
     } 
 } 
