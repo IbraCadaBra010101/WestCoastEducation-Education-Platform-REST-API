@@ -38,6 +38,11 @@ namespace WestCoastEducation.Data
             throw new NotImplementedException();
         }
 
+        public void GetStudentByPersonalNumber(StudentDtoForCreation student)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateStudent(UpdateStudentDto student)
         {
             throw new NotImplementedException();

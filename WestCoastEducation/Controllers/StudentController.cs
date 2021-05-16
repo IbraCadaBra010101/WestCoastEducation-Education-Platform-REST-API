@@ -72,12 +72,13 @@ namespace WestCoastEducation.Controllers
         {
             try
             {
-                var result = await _unitOfWork.StudentRepository.GetStudentByIdAsync(studentDto.);
-                if (result.CourseName == courseDto.CourseName) return BadRequest($"Kursen {courseDto.CourseName} existerar redan!");
 
-                _unitOfWork.CourseRepository.AddCourseToRepo(courseDto);
-                if (await _unitOfWork.Complete()) return StatusCode(201, "Succesfull, a new course resource was created");
-                return StatusCode(500, "Could not save course resource");
+                var result =  _unitOfWork.StudentRepository.GetStudentByPersonalNumber(studentDto.PersonalNumber);
+                if (result != null) return StatusCode(404, $"A student with the personal number {studentDto.PersonalNumber} already exists in the system.");
+             
+                _unitOfWork.StudentRepository.AddStudentToRepo(studentDto);
+                if (await _unitOfWork.Complete()) return StatusCode(201, "Succesfull, a new student resource was created");
+                return StatusCode(500, "Could not save student resource");
             }
             catch (Exception ex)
             {
@@ -85,6 +86,7 @@ namespace WestCoastEducation.Controllers
             }
         }
         // DELETE: api/Course/5
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourseDto(int id)
         {
@@ -100,7 +102,6 @@ namespace WestCoastEducation.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(500, ex.Message);
             }
         }
