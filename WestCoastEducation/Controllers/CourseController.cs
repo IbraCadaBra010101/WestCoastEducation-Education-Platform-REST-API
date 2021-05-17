@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WestCoastEducation.Interfaces;
 using WestCoastEducation.Models.CourseDtos;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
-using WestCoastEducation.Entites;
 
 namespace WestCoastEducation.Controllers
 {
@@ -41,19 +39,18 @@ namespace WestCoastEducation.Controllers
         }
 
         // PATCH: api/Course/5
-
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchCourseDto(int id, [FromBody] JsonPatchDocument<UpdateCourseDto> courseUpdatePatch) 
+        public async Task<IActionResult> PatchCourseDto(int id, [FromBody] JsonPatchDocument<UpdateCourseDto> courseUpdatePatch)
         {
-           
+
             try
-            { 
+            {
                 var course = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
 
                 if (course == null) return StatusCode(404, "Could not find the course you requested an update on");
-                
-             
-               _unitOfWork.CourseRepository.UpdateCourse(courseUpdatePatch, course);
+
+
+                _unitOfWork.CourseRepository.UpdateCourse(courseUpdatePatch, course);
 
                 if (await _unitOfWork.Complete()) return NoContent();
 
@@ -64,8 +61,7 @@ namespace WestCoastEducation.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-
-        // POST: api/Course
+        // POST: api/Course/
         [HttpPost]
         public async Task<ActionResult<CourseDto>> PostCourseDto(CourseDtoForCreation courseDto)
         {
@@ -83,25 +79,26 @@ namespace WestCoastEducation.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        // DELETE: api/Course/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteCourseDto(int id)
-        //{
-        //    //try
-        //    //{
-        //    //    var courseToDelete = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
+        // POST: api/Course/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCourseDto(int id)
+        {
+            try
+            {
+                var courseToDelete = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
 
-        //    //    if (courseToDelete == null) return NotFound($"Could not find course with id number {id}. Operation was canceled");
-        //    //    _unitOfWork.CourseRepository.DeleteCourse(courseToDelete);
+                if (courseToDelete == null) return NotFound($"Could not find course with id number {id}. Operation was canceled");
 
-        //    //    if (await _unitOfWork.Complete()) return StatusCode(200, $"{courseToDelete.CourseName} was succesfully deleted");
-        //    //    return StatusCode(500, $"Could not delete {courseToDelete.CourseName}");
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
+                _unitOfWork.CourseRepository.DeleteCourse(courseToDelete);
 
-        //    //    return StatusCode(500, ex.Message);
-        //    //}
-        //}
+                if (await _unitOfWork.Complete()) return StatusCode(200, $"{courseToDelete.CourseName} was succesfully deleted");
+                return StatusCode(500, $"Could not delete {courseToDelete.CourseName}");
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

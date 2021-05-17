@@ -28,9 +28,9 @@ namespace WestCoastEducation.Data
             _context.Entry(creationCourseMappedToEntityModel).State = EntityState.Added;
         }
 
-        public void DeleteCourse(CourseDto course)
+        public void DeleteCourse(Course course)
         {
-           
+            _context.Entry(course).State = EntityState.Deleted;
         }
 
         public async Task<IEnumerable<CourseDto>> GetAllCoursesAsync()
