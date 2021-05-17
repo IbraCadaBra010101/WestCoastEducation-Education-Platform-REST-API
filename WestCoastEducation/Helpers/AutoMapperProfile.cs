@@ -12,6 +12,7 @@ namespace WestCoastEducation.Helpers
        
             CreateMap<CourseDtoForCreation, Course>();
             CreateMap<UpdateCourseDto, Course>();
+            CreateMap<Course, UpdateCourseDto>();
             CreateMap<CourseDto, Course>();
             CreateMap<Course, CourseDto>();
 

@@ -48,6 +48,7 @@ namespace WestCoastEducation.Controllers
 
 
                 if (result == null) return StatusCode(404, "Could not find the student you requested an update on");
+                
 
                 _unitOfWork.StudentRepository.UpdateStudent(studentModelUpdate);
 
@@ -82,23 +83,23 @@ namespace WestCoastEducation.Controllers
         }
         // DELETE: api/Course/5
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourseDto(int id)
-        {
-            try
-            {
-                var courseToDelete = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteCourseDto(int id)
+        //{
+        //    try
+        //    {
+        //        var courseToDelete = await _unitOfWork.CourseRepository.GetCourseByIdAsync(id);
 
-                if (courseToDelete == null) return NotFound($"Could not find course with id number {id}. Operation was canceled");
-                _unitOfWork.CourseRepository.DeleteCourse(courseToDelete);
+        //        if (courseToDelete == null) return NotFound($"Could not find course with id number {id}. Operation was canceled");
+        //        _unitOfWork.CourseRepository.DeleteCourse(courseToDelete);
 
-                if (await _unitOfWork.Complete()) return StatusCode(200, $"{courseToDelete.CourseName} was succesfully deleted");
-                return StatusCode(500, $"Could not delete {courseToDelete.CourseName}");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
+        //        if (await _unitOfWork.Complete()) return StatusCode(200, $"{courseToDelete.CourseName} was succesfully deleted");
+        //        return StatusCode(500, $"Could not delete {courseToDelete.CourseName}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, ex.Message);
+        //    }
+        //}
     }
 }

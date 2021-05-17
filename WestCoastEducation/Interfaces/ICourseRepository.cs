@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WestCoastEducation.Entites;
 using WestCoastEducation.Models.CourseDtos;
@@ -9,9 +10,9 @@ namespace WestCoastEducation.Interfaces
     {
         void AddCourseToRepo(CourseDtoForCreation course);
         Task<IEnumerable<CourseDto>> GetAllCoursesAsync();
-        Task<CourseDto> GetCourseByIdAsync(int id);  
+        Task<Course> GetCourseByIdAsync(int id);  
         Task<Course> GetCourseByNameAsync(string courseName); 
         void DeleteCourse(CourseDto course); 
-        void UpdateCourse(UpdateCourseDto courseModelUpdate, int id); 
+        void UpdateCourse(JsonPatchDocument<UpdateCourseDto> patchItem, Course course);  
     } 
 } 

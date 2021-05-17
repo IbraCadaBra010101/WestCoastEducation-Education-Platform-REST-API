@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace WestCoastEducation.Data
 
         public void DeleteCourse(CourseDto course)
         {
-            throw new NotImplementedException();
+           
         }
 
         public async Task<IEnumerable<CourseDto>> GetAllCoursesAsync()
@@ -38,11 +39,11 @@ namespace WestCoastEducation.Data
             return _mapper.Map<IEnumerable<CourseDto>>(result);
         }
 
-        public async Task<CourseDto> GetCourseByIdAsync(int id)
+        public async Task<Course> GetCourseByIdAsync(int id)
         {
             var singleCourseEntity = await _context.Course.FindAsync(id);
-            var mappedTowardCourseDto = _mapper.Map<CourseDto>(singleCourseEntity);
-            return mappedTowardCourseDto;
+          
+            return singleCourseEntity;
         }
 
         public async Task<Course> GetCourseByNameAsync(string courseName)
@@ -50,32 +51,12 @@ namespace WestCoastEducation.Data
             return await _context.Course.FirstOrDefaultAsync(eachCourse => eachCourse.CourseName == courseName);
         }
 
-        public async void UpdateCourse(UpdateCourseDto courseModelUpdate, int id)
+        public void UpdateCourse(JsonPatchDocument<UpdateCourseDto> patchItem, Course course)
         {
-            var patchThis =  await _context.Course.SingleAsync(eachCourse => eachCourse.Id == id);
-            var mappedTowardCourse =   _mapper.Map<Course>(courseModelUpdate);
-            patchThis = mappedTowardCourse;
-            _context.Entry(patchThis).State = EntityState.Modified;
-        }
+            var courseToPatch = _mapper.Map<UpdateCourseDto>(course);
+            patchItem.ApplyTo(courseToPatch);
+            var mappedCourse = _mapper.Map(courseToPatch, course);
+            _context.Entry(mappedCourse).State = EntityState.Modified;   
+        } 
     }
 }
-
-
-/**
- * 
- * [HttpPatch("{id:int}")]
-public IActionResult Patch(int id, [FromBody] JsonPatchDocument<VideoGame> patchEntity)
-{
-    var entity = VideoGames.FirstOrDefault(videoGame => videoGame.Id == id);
- 
-    if (entity == null)
-    {
-        return NotFound();
-    }
- 
-    patchEntity.ApplyTo(entity, ModelState); // Must have Microsoft.AspNetCore.Mvc.NewtonsoftJson installed
-    
-    return Ok(entity);
-}
- * 
- * **/
