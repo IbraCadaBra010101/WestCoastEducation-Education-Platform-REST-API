@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WestCoastEducation.Entites;
 using WestCoastEducation.Models.CourseDtos;
+using WestCoastEducation.Models.StudentDtos;
 
 namespace WestCoastEducation.Data
 {

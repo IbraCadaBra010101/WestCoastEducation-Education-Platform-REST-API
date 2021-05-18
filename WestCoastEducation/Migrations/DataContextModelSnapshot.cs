@@ -66,7 +66,9 @@ namespace WestCoastEducation.Migrations
                         .HasColumnType("VARCHAR(14)");
 
                     b.Property<string>("PersonalNumber")
-                        .HasColumnType("CHAR(14)");
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("VARCHAR(12)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("VARCHAR(20)");

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WestCoastEducation.Entites
-{  
+{
     [Table("Student", Schema = "Students")]
     public class Student
-    { 
-      
+    {
+
         public int Id { get; set; }
 
         [Column(TypeName = "VARCHAR(14)")]
@@ -17,9 +18,10 @@ namespace WestCoastEducation.Entites
 
         [Column(TypeName = "VARCHAR(14)")]
         public string LastName { get; set; }
-      
-        [Column(TypeName = "CHAR(14)")]
-        public string PersonalNumber { get; set; }
+
+        [Column(TypeName = "VARCHAR")]
+        [Required(ErrorMessage = "Personalnumber is missing: 200012129999"), MaxLength(12), MinLength(12)]
+        public string PersonalNumber { get; set; } 
 
         [Column(TypeName = "VARCHAR(20)")]
         public string PhoneNumber { get; set; }
@@ -40,6 +42,6 @@ namespace WestCoastEducation.Entites
         public string Country { get; set; }
 
 
-     }
+    }
 }
 

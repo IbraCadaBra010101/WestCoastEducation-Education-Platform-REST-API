@@ -10,7 +10,7 @@ using WestCoastEducation.Data;
 namespace WestCoastEducation.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210516113920_initialCreate")]
+    [Migration("20210518110938_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,7 +68,9 @@ namespace WestCoastEducation.Migrations
                         .HasColumnType("VARCHAR(14)");
 
                     b.Property<string>("PersonalNumber")
-                        .HasColumnType("CHAR(14)");
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("VARCHAR(12)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("VARCHAR(20)");

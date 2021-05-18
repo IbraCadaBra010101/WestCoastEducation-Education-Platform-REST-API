@@ -91,7 +91,7 @@ namespace WestCoastEducation.Controllers
 
                 _unitOfWork.CourseRepository.DeleteCourse(courseToDelete);
 
-                if (await _unitOfWork.Complete()) return StatusCode(200, $"{courseToDelete.CourseName} was succesfully deleted");
+                if (await _unitOfWork.Complete()) return NoContent();
                 return StatusCode(500, $"Could not delete {courseToDelete.CourseName}");
             }
             catch (Exception ex)

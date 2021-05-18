@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using WestCoastEducation.Entites;
 using WestCoastEducation.Interfaces;
 using WestCoastEducation.Models.StudentDtos;
 
@@ -15,40 +17,39 @@ namespace WestCoastEducation.Data
 
         public StudentRepository(DataContext context, IMapper mapper)
         {
-            _context = context; 
+            _context = context;
             _mapper = mapper;
         }
         public void AddStudentToRepo(StudentDtoForCreation student)
         {
-            throw new NotImplementedException();
+            var creationStudentMappedToEntityModel = _mapper.Map<Student>(student);
+
+            _context.Entry(creationStudentMappedToEntityModel).State = EntityState.Added;
         }
 
-        public void DeleteStudent(StudentDto student)
+        public void DeleteStudent(Student student)
         {
-            throw new NotImplementedException();
+            _context.Entry(student).State = EntityState.Deleted;
         }
 
-        public Task<IEnumerable<StudentDto>> GetAllStudentsAsync()
+        public async Task<IEnumerable<StudentDto>> GetAllStudentsAsync()
         {
-            throw new NotImplementedException();
+            var result = await _context.Student.ToListAsync();
+            return _mapper.Map<IEnumerable<StudentDto>>(result);
         }
 
-        public Task<StudentDto> GetStudentByIdAsync(int id)
+        public async Task<Student> GetStudentByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var student = await _context.Student.FindAsync(id);
+            return student;
         }
-
-        public void GetStudentByPersonalNumber(StudentDtoForCreation student)
+        public async Task<StudentDto> GetStudentByPersonalNumber(string personalNumber)
         {
-            throw new NotImplementedException();
+            var studentEntity = await _context.Student.SingleOrDefaultAsync(student => student.PersonalNumber.Equals(personalNumber));
+            return _mapper.Map<StudentDto>(studentEntity);
         }
 
-        public Task<StudentDto> GetStudentByPersonalNumber(string personalnumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateStudent(UpdateStudentDto student)
+        public void UpdateStudent(JsonPatchDocument<UpdateStudentDto> patchItem, Student course)
         {
             throw new NotImplementedException();
         }

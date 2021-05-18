@@ -14,6 +14,7 @@ namespace WestCoastEducation.Models.StudentDtos
 
         [Required(ErrorMessage = "Student lastname is missing"), MinLength(2)]
         public string LastName { get; set; }
+
         public string PhoneNumber { get; set; }
         public int StreetNumber { get; set; }
         public string City { get; set; }
