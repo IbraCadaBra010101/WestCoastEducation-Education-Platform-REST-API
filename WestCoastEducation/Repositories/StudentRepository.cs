@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WestCoastEducation.Entites;
@@ -42,16 +41,54 @@ namespace WestCoastEducation.Data
         {
             var student = await _context.Student.FindAsync(id);
             return student;
+
         }
         public async Task<StudentDto> GetStudentByPersonalNumber(string personalNumber)
         {
             var studentEntity = await _context.Student.SingleOrDefaultAsync(student => student.PersonalNumber.Equals(personalNumber));
             return _mapper.Map<StudentDto>(studentEntity);
         }
+        // för att patcha ett object i postman eller swagger skicka in en [] array och en eller flera objekt {}
+        //[
+        //    {
+        //     "op": "replace",
+        //     "path": "City",
+        //     "value": "Montevideo"
+        //    }
+        //]
+        // I SWAGGER 
+        //        [
+        //  {
+        //    "operationType": 0, 
+        //    "path": "string",
+        //    "op": "string",
+        //    "from": "string"
+        //  }
+        //      ]
 
-        public void UpdateStudent(JsonPatchDocument<UpdateStudentDto> patchItem, Student course)
+//        [
+//  {
+//    "operationType": 2,
+//    "path": "city",
+//    "op": "replace",
+//    "value": "Paris"
+//  }
+//]
+        //FIELDS
+        //Add	0	
+        //Copy	4	
+        //Invalid	6	    
+        //Move	3	
+        //Remove	1	
+        //Replace	2	
+        //Test	5
+
+        public void UpdateStudent(JsonPatchDocument<UpdateStudentDto> patchItem, Student student)
         {
-            throw new NotImplementedException();
+            var studentToPatch = _mapper.Map<UpdateStudentDto>(student);
+            patchItem.ApplyTo(studentToPatch);
+            var mappedStudent = _mapper.Map(studentToPatch, student);
+            _context.Entry(mappedStudent).State = EntityState.Modified;
         }
     }
 }

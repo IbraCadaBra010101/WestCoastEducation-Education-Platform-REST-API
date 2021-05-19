@@ -7,7 +7,7 @@ using WestCoastEducation.Entites;
 
 namespace WestCoastEducation.Models.StudentDtos
 {
-    public class StudentDtoBaseClass
+    public class StudentDtoBase
     {
         [Required(ErrorMessage = "Student firstname is missing"), MinLength(2)]
         public string FirstName { get; set; }

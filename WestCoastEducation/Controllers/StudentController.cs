@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WestCoastEducation.Interfaces;
 using WestCoastEducation.Models.StudentDtos;
@@ -28,7 +29,7 @@ namespace WestCoastEducation.Controllers
             return Ok(result);
         }
 
-        GET: api/Student/5
+        // GET: api/Student/5
         [HttpGet("{id}")]
         public async Task<ActionResult<StudentDto>> GetStudentDto(int id)
         {
@@ -39,28 +40,28 @@ namespace WestCoastEducation.Controllers
 
         // PATCH: api/Course/5
 
-        //[HttpPatch("{id}")]
-        //public async Task<IActionResult> PatchStudentDto(int id, UpdateStudentDto studentModelUpdate)
-        //{ 
-        //    try
-        //    {
-        //        var result = _unitOfWork.StudentRepository.GetStudentByIdAsync(id);
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchCourseDto(int id, [FromBody] JsonPatchDocument<UpdateStudentDto> studentUpdatePatch)
+        { 
+
+            try
+            { 
+                var student = await _unitOfWork.StudentRepository.GetStudentByIdAsync(id);
+
+                if (student == null) return StatusCode(404, "Could not find the student you requested an update on");
 
 
-        //        if (result == null) return StatusCode(404, "Could not find the student you requested an update on");
+                _unitOfWork.StudentRepository.UpdateStudent(studentUpdatePatch, student);
 
+                if (await _unitOfWork.Complete()) return NoContent();
 
-        //        _unitOfWork.StudentRepository.UpdateStudent(studentModelUpdate);
-
-        //        if (await _unitOfWork.Complete()) return NoContent();
-
-        //        return StatusCode(500, $"Could not update student nr {id}");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, ex.Message);
-        //    }
-        //}
+                return StatusCode(500, $"Could not update course nr {id}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         // POST: api/Student
         [HttpPost]

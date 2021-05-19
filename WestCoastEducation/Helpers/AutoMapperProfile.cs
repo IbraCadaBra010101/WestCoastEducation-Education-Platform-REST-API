@@ -21,7 +21,9 @@ namespace WestCoastEducation.Helpers
             // STUDENT MAPPING
             CreateMap<StudentDtoForCreation, Student>();
             CreateMap<Student, StudentDto>();
-            CreateMap<StudentDto,Student> ();
+            CreateMap<StudentDto, Student>();
+            CreateMap<Student, UpdateStudentDto>();
+            CreateMap<UpdateStudentDto, Student>();
         }
     }
 }
