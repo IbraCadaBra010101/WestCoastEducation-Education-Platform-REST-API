@@ -14,5 +14,5 @@ namespace WestCoastEducation.Interfaces
         Task<Student> GetStudentByIdAsync(int id); 
         void DeleteStudent(Student student);
         void UpdateStudent(JsonPatchDocument<UpdateStudentDto> patchItem, Student course);
-    }
+     }
 }

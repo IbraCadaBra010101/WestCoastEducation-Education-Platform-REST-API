@@ -7,7 +7,6 @@ namespace WestCoastEducation.Models.StudentDtos
 {
     public class UpdateStudentDto
     {
-        public string CourseActiveStatus { get; set; }
         public string PhoneNumber { get; set; }
         public int StreetNumber { get; set; }
         public string City { get; set; }

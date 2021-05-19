@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace WestCoastEducation.Entites
 {
@@ -21,6 +20,10 @@ namespace WestCoastEducation.Entites
 
         [Column(TypeName = "VARCHAR(25)")]
         public string Subject { get; set; }
+
+        [Column(TypeName = "VARCHAR")]
+        [Required(ErrorMessage = "Missing course status. Write if course is  cancele or active")]
+        public string CourseActiveStatus { get; set; }
 
         public DateTime? StartDate { get; set; }
 

@@ -23,6 +23,7 @@ namespace WestCoastEducation.Migrations
                     CourseName = table.Column<string>(type: "VARCHAR(25)", nullable: true),
                     CourseInformation = table.Column<string>(type: "VARCHAR(200)", nullable: true),
                     Subject = table.Column<string>(type: "VARCHAR(25)", nullable: true),
+                    CourseActiveStatus = table.Column<string>(type: "VARCHAR", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FinishDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -42,7 +43,6 @@ namespace WestCoastEducation.Migrations
                     LastName = table.Column<string>(type: "VARCHAR(14)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PersonalNumber = table.Column<string>(type: "VARCHAR(12)", maxLength: 12, nullable: false),
-                    CourseActiveStatus = table.Column<string>(type: "VARCHAR", nullable: false),
                     PhoneNumber = table.Column<string>(type: "VARCHAR(20)", nullable: true),
                     StreetNumber = table.Column<short>(type: "SMALLINT", nullable: false),
                     City = table.Column<string>(type: "VARCHAR(12)", nullable: true),

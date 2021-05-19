@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using WestCoastEducation.Entites;
 using WestCoastEducation.Interfaces;
 using WestCoastEducation.Models.CourseDtos;
 
@@ -37,6 +39,17 @@ namespace WestCoastEducation.Controllers
             if (result == null) return NotFound();
             return Ok(result);
         }
+
+        // GET: api/Course/courseName
+        [HttpGet("{searchQuery}")]
+        public async Task<ActionResult<IEnumerable<Course>>> GetCourseDto(string searchQuery)
+        {
+            var courses = await _unitOfWork.CourseRepository.GetCourseBySearchQuery(searchQuery);
+            var isCourseListEmpyOrNull = courses == null || !courses.Any();
+            if (isCourseListEmpyOrNull) return NotFound();
+            return Ok(courses);
+        }
+
 
         // PATCH: api/Course/5
         [HttpPatch("{id}")]

@@ -51,6 +51,12 @@ namespace WestCoastEducation.Data
             return await _context.Course.FirstOrDefaultAsync(eachCourse => eachCourse.CourseName == courseName);
         }
 
+        public async Task<IEnumerable<Course>> GetCourseByNameOrPartOfNameAsync(string searchQuery)
+        {
+            var queryableCourseCollection = _context.Course as IQueryable<Course>;
+
+        }
+
         public void UpdateCourse(JsonPatchDocument<UpdateCourseDto> patchItem, Course course)
         {
             var courseToPatch = _mapper.Map<UpdateCourseDto>(course);
