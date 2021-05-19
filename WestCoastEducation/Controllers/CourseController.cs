@@ -41,8 +41,8 @@ namespace WestCoastEducation.Controllers
         }
 
         // GET: api/Course/courseName
-        [HttpGet("{searchQuery}")]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourseDto(string searchQuery)
+        [HttpGet("filter{searchQuery}")]
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourseDtoByQuery(string searchQuery)
         {
             var courses = await _unitOfWork.CourseRepository.GetCourseBySearchQuery(searchQuery);
             var isCourseListEmpyOrNull = courses == null || !courses.Any();

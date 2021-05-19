@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,13 +35,14 @@ namespace WestCoastEducation.Data
         public async Task<IEnumerable<CourseDto>> GetAllCoursesAsync()
         {
             var result = await _context.Course.ToListAsync();
-            return _mapper.Map<IEnumerable<CourseDto>>(result);
+            var mapped = _mapper.Map<IEnumerable<CourseDto>>(result);
+            return mapped;
         }
 
         public async Task<Course> GetCourseByIdAsync(int id)
         {
             var singleCourseEntity = await _context.Course.FindAsync(id);
-          
+
             return singleCourseEntity;
         }
 
@@ -51,10 +51,13 @@ namespace WestCoastEducation.Data
             return await _context.Course.FirstOrDefaultAsync(eachCourse => eachCourse.CourseName == courseName);
         }
 
-        public async Task<IEnumerable<Course>> GetCourseByNameOrPartOfNameAsync(string searchQuery)
+        public async Task<IEnumerable<CourseDto>> GetCourseBySearchQuery(string searchQuery)
         {
-            var queryableCourseCollection = _context.Course as IQueryable<Course>;
+            var trimmedSearchQuery = searchQuery.Trim();
+            var listOfCourseMatches = await _context.Course.Where(course => course.CourseName.Contains(trimmedSearchQuery)).ToListAsync();
+            var listOfCourseMatchesMappedToDto = _mapper.Map<IEnumerable<CourseDto>>(listOfCourseMatches);
 
+            return listOfCourseMatchesMappedToDto;
         }
 
         public void UpdateCourse(JsonPatchDocument<UpdateCourseDto> patchItem, Course course)
@@ -62,7 +65,7 @@ namespace WestCoastEducation.Data
             var courseToPatch = _mapper.Map<UpdateCourseDto>(course);
             patchItem.ApplyTo(courseToPatch);
             var mappedCourse = _mapper.Map(courseToPatch, course);
-            _context.Entry(mappedCourse).State = EntityState.Modified;   
-        } 
+            _context.Entry(mappedCourse).State = EntityState.Modified;
+        }
     }
 }

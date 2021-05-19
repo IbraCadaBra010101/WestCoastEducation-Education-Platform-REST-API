@@ -27,8 +27,7 @@ namespace WestCoastEducation.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CourseActiveStatus")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR");
+                        .HasColumnType("VARCHAR(25)");
 
                     b.Property<string>("CourseInformation")
                         .HasColumnType("VARCHAR(200)");

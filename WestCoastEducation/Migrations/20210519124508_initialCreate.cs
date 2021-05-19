@@ -23,7 +23,7 @@ namespace WestCoastEducation.Migrations
                     CourseName = table.Column<string>(type: "VARCHAR(25)", nullable: true),
                     CourseInformation = table.Column<string>(type: "VARCHAR(200)", nullable: true),
                     Subject = table.Column<string>(type: "VARCHAR(25)", nullable: true),
-                    CourseActiveStatus = table.Column<string>(type: "VARCHAR", nullable: false),
+                    CourseActiveStatus = table.Column<string>(type: "VARCHAR(25)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FinishDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },

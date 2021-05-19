@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using System.Collections.Generic;
 using WestCoastEducation.Entites;
-using WestCoastEducation.Models;
 using WestCoastEducation.Models.CourseDtos;
 using WestCoastEducation.Models.StudentDtos;
 
@@ -11,12 +11,12 @@ namespace WestCoastEducation.Helpers
         public AutoMapperProfile()
         {
             // COURSE MAPPING
-            CreateMap<CourseDtoForCreation, Course>();
+            //  CreateMap<CourseDtoForCreation, Course>();
             CreateMap<UpdateCourseDto, Course>();
             CreateMap<Course, UpdateCourseDto>();
             CreateMap<CourseDto, Course>();
             CreateMap<Course, CourseDto>();
-
+            CreateMap<CourseDtoForCreation, Course>();
 
             // STUDENT MAPPING
             CreateMap<StudentDtoForCreation, Student>();
@@ -24,6 +24,7 @@ namespace WestCoastEducation.Helpers
             CreateMap<StudentDto, Student>();
             CreateMap<Student, UpdateStudentDto>();
             CreateMap<UpdateStudentDto, Student>();
+
         }
     }
 }

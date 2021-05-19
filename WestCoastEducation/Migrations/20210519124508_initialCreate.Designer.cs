@@ -10,7 +10,7 @@ using WestCoastEducation.Data;
 namespace WestCoastEducation.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210519101122_initialCreate")]
+    [Migration("20210519124508_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,8 +29,7 @@ namespace WestCoastEducation.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CourseActiveStatus")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR");
+                        .HasColumnType("VARCHAR(25)");
 
                     b.Property<string>("CourseInformation")
                         .HasColumnType("VARCHAR(200)");

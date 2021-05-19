@@ -10,10 +10,8 @@ namespace WestCoastEducation.Entites
     {
         public int Id { get; set; }
 
-
         [Column(TypeName = "VARCHAR(25)")]
         public string CourseName { get; set; }
-
 
         [Column(TypeName = "VARCHAR(200)")]
         public string CourseInformation { get; set; }
@@ -21,8 +19,8 @@ namespace WestCoastEducation.Entites
         [Column(TypeName = "VARCHAR(25)")]
         public string Subject { get; set; }
 
-        [Column(TypeName = "VARCHAR")]
-        [Required(ErrorMessage = "Missing course status. Write if course is  cancele or active")]
+        [Column(TypeName = "VARCHAR(25)")]
+
         public string CourseActiveStatus { get; set; }
 
         public DateTime? StartDate { get; set; }

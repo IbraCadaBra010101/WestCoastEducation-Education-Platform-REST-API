@@ -12,7 +12,7 @@ namespace WestCoastEducation.Interfaces
         Task<IEnumerable<CourseDto>> GetAllCoursesAsync();
         Task<Course> GetCourseByIdAsync(int id);  
         Task<Course> GetCourseByNameAsync(string courseName);  
-        Task<IEnumerable<Course>> GetCourseBySearchQuery(string searchQuery);
+        Task<IEnumerable<CourseDto>> GetCourseBySearchQuery(string searchQuery);
         void DeleteCourse(Course course); 
         void UpdateCourse(JsonPatchDocument<UpdateCourseDto> patchItem, Course course);  
 
