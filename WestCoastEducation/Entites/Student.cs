@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WestCoastEducation.Entites
 {
@@ -19,9 +15,16 @@ namespace WestCoastEducation.Entites
         [Column(TypeName = "VARCHAR(14)")]
         public string LastName { get; set; }
 
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        public string Email { get; set; }
+
         [Column(TypeName = "VARCHAR")]
         [Required(ErrorMessage = "Personalnumber is missing: 200012129999"), MaxLength(12), MinLength(12)]
-        public string PersonalNumber { get; set; } 
+        public string PersonalNumber { get; set; }
+
+        [Column(TypeName = "VARCHAR")]
+        [Required(ErrorMessage = "Missing course status. Write if course is  cancele or active")]
+        public string CourseActiveStatus { get; set; }
 
         [Column(TypeName = "VARCHAR(20)")]
         public string PhoneNumber { get; set; }
@@ -33,6 +36,9 @@ namespace WestCoastEducation.Entites
         [Column(TypeName = "VARCHAR(12)")]
         public string City { get; set; }
 
+        [Column(TypeName = "VARCHAR(12)")]
+        public string StreetName { get; set; }
+
 
         [Column(TypeName = "VARCHAR(12)")]
         public string PostalCode { get; set; }
@@ -40,7 +46,6 @@ namespace WestCoastEducation.Entites
 
         [Column(TypeName = "VARCHAR(60)")]
         public string Country { get; set; }
-
 
     }
 }

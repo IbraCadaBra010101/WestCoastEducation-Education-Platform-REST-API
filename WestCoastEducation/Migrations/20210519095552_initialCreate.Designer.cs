@@ -10,7 +10,7 @@ using WestCoastEducation.Data;
 namespace WestCoastEducation.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210518110938_initialCreate")]
+    [Migration("20210519095552_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,6 +61,13 @@ namespace WestCoastEducation.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("VARCHAR(60)");
 
+                    b.Property<string>("CourseActiveStatus")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("VARCHAR(14)");
 
@@ -76,6 +83,9 @@ namespace WestCoastEducation.Migrations
                         .HasColumnType("VARCHAR(20)");
 
                     b.Property<string>("PostalCode")
+                        .HasColumnType("VARCHAR(12)");
+
+                    b.Property<string>("StreetName")
                         .HasColumnType("VARCHAR(12)");
 
                     b.Property<short>("StreetNumber")

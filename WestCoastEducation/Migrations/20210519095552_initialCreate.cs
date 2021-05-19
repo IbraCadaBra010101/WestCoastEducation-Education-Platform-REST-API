@@ -40,10 +40,13 @@ namespace WestCoastEducation.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "VARCHAR(14)", nullable: true),
                     LastName = table.Column<string>(type: "VARCHAR(14)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PersonalNumber = table.Column<string>(type: "VARCHAR(12)", maxLength: 12, nullable: false),
+                    CourseActiveStatus = table.Column<string>(type: "VARCHAR", nullable: false),
                     PhoneNumber = table.Column<string>(type: "VARCHAR(20)", nullable: true),
                     StreetNumber = table.Column<short>(type: "SMALLINT", nullable: false),
                     City = table.Column<string>(type: "VARCHAR(12)", nullable: true),
+                    StreetName = table.Column<string>(type: "VARCHAR(12)", nullable: true),
                     PostalCode = table.Column<string>(type: "VARCHAR(12)", nullable: true),
                     Country = table.Column<string>(type: "VARCHAR(60)", nullable: true)
                 },
